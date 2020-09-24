@@ -111,6 +111,10 @@ jobs:
           else
           yarn java;
           fi
+    - name: Tutorials
+      script:
+        - echo $APPLITOOLS_REPORT_ID
+        - ./eyes.selenium.java/tutorials/run.sh
     - stage: Test Appium IOS
       if: type != cron
       script:
