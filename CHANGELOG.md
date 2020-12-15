@@ -1,5 +1,6 @@
 ## [vNext]
 ### Updated 
+- Dom snapshot 4.4.1. [Trello 2360](https://trello.com/c/Nkq5X4dJ)
 - Updated method for searching scrollable view. Ignore horizontal scrollable views on searching for the scrollable element. [Trello 2347](https://trello.com/c/FDZ1oWF9) 
 - Adjusted scroll coordinates on a stitchOverlap value. [Trello 2138](https://trello.com/c/EI2mxmTD)
 
