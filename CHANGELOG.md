@@ -1,4 +1,4 @@
-## [vNext]
+## [3.189.0] - 2020-12-17
 ### Updated 
 - Dom snapshot 4.4.1. [Trello 2360](https://trello.com/c/Nkq5X4dJ)
 - Updated method for searching scrollable view. Ignore horizontal scrollable views on searching for the scrollable element. [Trello 2347](https://trello.com/c/FDZ1oWF9) 
