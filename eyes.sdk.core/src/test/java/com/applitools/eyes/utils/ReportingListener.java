@@ -31,10 +31,6 @@ public class ReportingListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult result) {
         System.out.printf("Test Skipped: %s of %s%n", result.getMethod().getMethodName(), result.getTestClass().getName());
-        Object instance = result.getInstance();
-        if (instance instanceof ReportingTestSuite) {
-            ((ReportingTestSuite)instance).appendTestResults(result);
-        }
     }
 
     @Override

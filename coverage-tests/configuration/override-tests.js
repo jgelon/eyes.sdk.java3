@@ -63,4 +63,13 @@ module.exports = {
     'check frame fully with vg': {skip: true}, //  stale element reference
     'check frame fully with css stitching': {skip: true}, // diffs
     'check frame after manual switch to frame with vg classic': {skip: true}, // java.lang.IllegalArgumentException: checkTasks == 0
+    'should send dom and location when check window': {skipEmit: true},
+    'should send dom and location when check window fully': {skipEmit: true},
+    'should send dom and location when check frame': {skipEmit: true},
+    'should send dom and location when check frame fully': {skipEmit: true},
+    'should send dom and location when check region by selector': {skipEmit: true},
+    'should send dom and location when check region by selector fully': {skipEmit: true},
+    'should send dom and location when check region by selector in frame': {skipEmit: true},
+    'should send dom and location when check region by selector with custom scroll root': {skipEmit: true},
+    'should send dom and location when check region by selector fully with custom scroll root': {skipEmit: true}
  }

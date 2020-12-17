@@ -17,7 +17,7 @@
     "java": "yarn && yarn docker:start && yarn test && yarn report",
     "local": "yarn install --no-lockfile && yarn docker:start && yarn test && yarn report; yarn docker:stop",
     "release": "yarn && yarn docker:start && yarn test && yarn report:prod",
-    "generate": "coverage-tests generate ./configuration --pascalizeTests",
+    "generate": "coverage-tests generate ./configuration --pascalizeTests --strict",
     "test": "yarn generate && mvn test",
     "report": "yarn move:report && coverage-tests report ./configuration  --sandbox$( [ -z $APPLITOOLS_REPORT_ID ] || echo \" --reportId $APPLITOOLS_REPORT_ID\" )",
     "report:prod": "yarn move:report && coverage-tests report ./configuration --reportId $APPLITOOLS_REPORT_ID",
