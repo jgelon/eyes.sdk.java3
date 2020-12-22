@@ -82,10 +82,10 @@ jobs:
         - if [[ "$TRAVIS_EVENT_TYPE" == "cron" && "$TRAVIS_BRANCH" == "master" ]]; then
           sed -i 's/passedTestsSuite.xml/devTestsSuite.xml/g' $TRAVIS_BUILD_DIR/eyes.selenium.java/pom.xml;
           fi
-        - chmod +x ./runTests.sh
-        - ./runTests.sh "eyes.selenium.java"
         - chmod +x ./runConnectivityTests.sh
         - ./runConnectivityTests.sh
+        - chmod +x ./runTests.sh
+        - ./runTests.sh "eyes.selenium.java"
     - name: Selenium Mobile
       if: type != cron
       script:
