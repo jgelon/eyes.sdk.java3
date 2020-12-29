@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import static org.mockito.Mockito.mock;
 
 @RunWith(Parameterized.class)
-public class TestDriverInstance extends ReportingTestSuite {
+public class TestDriverInstance {
 
     @DataProvider(name = "data")
     public static Object[][] data() {
@@ -25,8 +25,6 @@ public class TestDriverInstance extends ReportingTestSuite {
 
     @Test(dataProvider = "data")
     public void testDriver(Class clazz, boolean condition) {
-        super.addSuiteArg("driverInstance", clazz);
-
         WebDriver webDriver = (WebDriver) mock(clazz);
         Assert.assertEquals(EyesDriverUtils.isMobileDevice(webDriver), condition);
     }
