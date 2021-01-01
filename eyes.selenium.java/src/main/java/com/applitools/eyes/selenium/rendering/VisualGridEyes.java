@@ -291,7 +291,7 @@ public class VisualGridEyes implements ISeleniumEyes {
         return firstResult;
     }
 
-    public boolean isOpen() {
+    public boolean getIsOpen() {
         return !isEyesClosed();
     }
 

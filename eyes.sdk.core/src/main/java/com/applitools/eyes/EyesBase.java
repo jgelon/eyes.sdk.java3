@@ -291,7 +291,7 @@ public abstract class EyesBase implements IEyesBase {
     /**
      * @return Whether a session is open.
      */
-    public boolean isOpen() {
+    public boolean getIsOpen() {
         return isOpen;
     }
 
@@ -674,7 +674,7 @@ public abstract class EyesBase implements IEyesBase {
             tag = "";
         }
 
-        ArgumentGuard.isValidState(isOpen(), "Eyes not open");
+        ArgumentGuard.isValidState(getIsOpen(), "Eyes not open");
         result = matchWindow(region, tag, checkSettingsInternal, source);
         validateResult(result);
         return result;

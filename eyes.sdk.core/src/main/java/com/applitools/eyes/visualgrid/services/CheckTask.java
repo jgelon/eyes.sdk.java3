@@ -58,7 +58,7 @@ public class CheckTask {
     }
 
     public boolean isReadyForRender() {
-        return runningTest.isOpen() && runningTest.isCheckTaskReadyForRender(this);
+        return runningTest.getIsOpen() && runningTest.isCheckTaskReadyForRender(this);
     }
 
     public String getTestId() {

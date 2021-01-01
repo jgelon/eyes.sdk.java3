@@ -53,7 +53,7 @@ public class VisualGridRunningTest extends RunningTest {
     }
 
     boolean isCheckTaskReadyForRender(CheckTask checkTask) {
-        if (!isOpen()) {
+        if (!getIsOpen()) {
             return false;
         }
 

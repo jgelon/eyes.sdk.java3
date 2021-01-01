@@ -402,8 +402,8 @@ public class Eyes implements IEyesBase {
      * Gets is open.
      * @return Whether a session is open.
      */
-    public boolean isOpen() {
-        return activeEyes.isOpen();
+    public boolean getIsOpen() {
+        return activeEyes.getIsOpen();
     }
 
     /**

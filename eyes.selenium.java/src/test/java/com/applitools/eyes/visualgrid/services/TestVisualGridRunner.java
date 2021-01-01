@@ -52,7 +52,7 @@ public class TestVisualGridRunner {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 IEyes eyes = runner.allEyes.iterator().next();
-                if (!eyes.getAllRunningTests().values().iterator().next().isOpen()) {
+                if (!eyes.getAllRunningTests().values().iterator().next().getIsOpen()) {
                     errorMessage.set("Render called before open");
                 }
 

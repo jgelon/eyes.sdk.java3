@@ -153,7 +153,7 @@ public class EyesServiceRunner extends Thread {
             for (IEyes eyes : allEyes) {
                 for (RunningTest runningTest : eyes.getAllRunningTests().values()) {
                     if (runningTest.isTestReadyToClose()) {
-                        if (!runningTest.isOpen()) {
+                        if (!runningTest.getIsOpen()) {
                             // If the test isn't open and is ready to close, it means the open failed
                             openService.decrementConcurrency();
                             runningTest.closeFailed(new EyesException("Eyes never opened"));
