@@ -1,3 +1,7 @@
+## [3.190.1] - 2021-01-01
+### Fixed
+- reverted rename of "getIsOpen". 
+
 ## [3.190.0] - 2020-12-31
 ### Added
 - New JS layout feature and `setLayoutBreakpoints' API. [Trello 2387](https://trello.com/c/8caokJ19) [Trello 2258](https://trello.com/c/3Ty3HRCG)
