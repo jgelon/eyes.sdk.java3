@@ -553,7 +553,7 @@ public class VisualGridEyes implements ISeleniumEyes {
             blobsUrls[i] = scriptResult.getBlobs().get(i).getUrl();
         }
 
-        logger.log(testIds, Stage.CHECK, Type.DOM_SCRIPT,
+        logger.log(TraceLevel.Info, testIds, Stage.CHECK, Type.DOM_SCRIPT,
                 Pair.of("cdtSize", scriptResult.getCdt().size()),
                 Pair.of("blobs", blobsUrls),
                 Pair.of("resourceUrls", scriptResult.getResourceUrls()));

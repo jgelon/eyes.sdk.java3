@@ -1,4 +1,4 @@
-## [vNext]
+## [3.190.2]
 ### Updated
 - Dom snapshot 4.4.3. [Trello 2405](https://trello.com/c/wBy9nGQi)
 - Added debug screenshot before calling dom snapshot in js layout.
