@@ -81,6 +81,7 @@ public abstract class RunningTest extends EyesBase implements IBatchCloser {
     }
 
     public void closeCompleted(TestResults testResults) {
+        startedCloseProcess = true;
         if (!isTestAborted()) {
             try {
                 logSessionResultsAndThrowException(true, testResults);
@@ -94,6 +95,7 @@ public abstract class RunningTest extends EyesBase implements IBatchCloser {
     }
 
     public void closeFailed(Throwable t) {
+        startedCloseProcess = true;
         if (error == null) {
             error = t;
         }
@@ -119,6 +121,7 @@ public abstract class RunningTest extends EyesBase implements IBatchCloser {
     }
 
     public void setTestInExceptionMode(Throwable e) {
+        GeneralUtils.logExceptionStackTrace(logger, Stage.GENERAL, e, getTestId());
         if (isTestAborted()) {
             return;
         }
