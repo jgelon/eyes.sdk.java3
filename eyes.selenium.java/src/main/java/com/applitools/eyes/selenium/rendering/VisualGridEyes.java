@@ -575,6 +575,10 @@ public class VisualGridEyes implements ISeleniumEyes {
             checkTasks.add(runningTest.issueCheck((ICheckSettings) checkSettingsInternal, regionsXPaths, source));
         }
 
+        if (checkTasks.isEmpty()) {
+            logger.log(TraceLevel.Warn, testIds, Stage.CHECK, null, Pair.of("message", "No check tasks created. Tests were probably aborted"));
+            return;
+        }
         scriptResult.setUserAgent(userAgent);
         this.runner.setDebugResourceWriter(getConfiguration().getDebugResourceWriter());
         this.runner.check(scriptResult, checkTasks);
@@ -893,6 +897,9 @@ public class VisualGridEyes implements ISeleniumEyes {
         List<TestResultContainer> allResults = new ArrayList<>();
         for (RunningTest runningTest : testList.values()) {
             if (!runningTest.isCompleted()) {
+                if (runner.getError() != null) {
+                    throw new EyesException("Execution crashed", runner.getError());
+                }
                 return null;
             }
 
@@ -902,6 +909,7 @@ public class VisualGridEyes implements ISeleniumEyes {
         return allResults;
     }
 
+    @Override
     public boolean isCompleted() {
         return getAllTestResults() != null;
     }

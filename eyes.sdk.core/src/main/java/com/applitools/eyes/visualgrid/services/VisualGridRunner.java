@@ -121,7 +121,7 @@ public class VisualGridRunner extends EyesRunner {
 
     public TestResultsSummary getAllTestResultsImpl(boolean throwException) {
         boolean isRunning = true;
-        while (isRunning && eyesServiceRunner.getError() == null) {
+        while (isRunning && getError() == null) {
             isRunning = false;
             synchronized (allEyes) {
                 for (IEyes eyes : allEyes) {
@@ -134,8 +134,8 @@ public class VisualGridRunner extends EyesRunner {
             } catch (InterruptedException ignored) {}
         }
 
-        if (eyesServiceRunner.getError() != null) {
-            throw new EyesException("Execution crashed", eyesServiceRunner.getError());
+        if (getError() != null) {
+            throw new EyesException("Execution crashed", getError());
         }
 
         eyesServiceRunner.stopServices();
@@ -159,6 +159,10 @@ public class VisualGridRunner extends EyesRunner {
             throw new Error(exception);
         }
         return new TestResultsSummary(allResults);
+    }
+
+    public Throwable getError() {
+        return eyesServiceRunner.getError();
     }
 
     public void setDebugResourceWriter(IDebugResourceWriter debugResourceWriter) {

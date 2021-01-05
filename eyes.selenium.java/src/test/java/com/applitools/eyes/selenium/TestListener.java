@@ -75,9 +75,7 @@ public class TestListener implements ITestListener {
     private void afterMethodFailure(TestSetup testSetup) {
         Eyes eyes = testSetup.getEyes();
         try {
-            if (eyes.getIsOpen()) {
-                eyes.closeAsync();
-            }
+            eyes.closeAsync();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -92,25 +90,22 @@ public class TestListener implements ITestListener {
     private boolean afterMethodSuccess(TestSetup testSetup) {
         Eyes eyes = testSetup.getEyes();
         try {
-            if (eyes.getIsOpen()) {
+            TestResults results;
+            results = eyes.close();
+            if (eyes.getIsDisabled()) {
+                return true;
+            } else if (results == null) {
+                return true;
+            }
 
-                TestResults results;
-                results = eyes.close();
-                if (eyes.getIsDisabled()) {
-                    return true;
-                } else if (results == null) {
-                    return true;
-                }
+            SessionResults resultObject = TestUtils.getSessionResults(eyes.getApiKey(), results);
 
-                SessionResults resultObject = TestUtils.getSessionResults(eyes.getApiKey(), results);
+            ActualAppOutput[] actualAppOutput = resultObject.getActualAppOutput();
 
-                ActualAppOutput[] actualAppOutput = resultObject.getActualAppOutput();
-
-                if (actualAppOutput.length > 0) {
-                    ImageMatchSettings imageMatchSettings = actualAppOutput[0].getImageMatchSettings();
-                    compareRegions(testSetup, imageMatchSettings);
-                    compareProperties(testSetup, imageMatchSettings);
-                }
+            if (actualAppOutput.length > 0) {
+                ImageMatchSettings imageMatchSettings = actualAppOutput[0].getImageMatchSettings();
+                compareRegions(testSetup, imageMatchSettings);
+                compareProperties(testSetup, imageMatchSettings);
             }
             return true;
         } catch (Throwable e) {
