@@ -3,6 +3,7 @@ package com.applitools.eyes.utils;
 import com.applitools.eyes.FileLogger;
 import com.applitools.eyes.LogHandler;
 import com.applitools.eyes.StdoutLogHandler;
+import com.applitools.eyes.logging.TraceLevel;
 import com.applitools.eyes.selenium.Eyes;
 
 import java.io.File;
@@ -23,7 +24,7 @@ public class SeleniumTestUtils {
             eyes.setDebugScreenshotsPrefix(methodName + "_");
             eyes.setSaveDebugScreenshots(true);
         } else {
-            logHandler = new StdoutLogHandler();
+            logHandler = new StdoutLogHandler(TraceLevel.Warn);
         }
         eyes.setLogHandler(logHandler);
     }
