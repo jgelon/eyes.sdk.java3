@@ -14,7 +14,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class VisualGridRunningTest extends RunningTest {
     // The maximum number of steps which can run in parallel
@@ -31,16 +30,9 @@ public class VisualGridRunningTest extends RunningTest {
     }
 
     public VisualGridRunningTest(Configuration configuration, RenderBrowserInfo browserInfo,
-                                 List<PropertyData> properties, Logger logger) {
+                                 List<PropertyData> properties, Logger logger, ServerConnector serverConnector) {
         this(browserInfo, logger, configuration);
-        if (browserInfo.getEmulationInfo() != null) {
-            Map<String, DeviceSize> deviceSizes = getDevicesSizes(ServerConnector.EMULATED_DEVICES_PATH);
-            browserInfo.setEmulationDeviceSize(deviceSizes.get(browserInfo.getEmulationInfo().getDeviceName()));
-        }
-        if (browserInfo.getIosDeviceInfo() != null) {
-            Map<String, DeviceSize> deviceSizes = getDevicesSizes(ServerConnector.IOS_DEVICES_PATH);
-            browserInfo.setIosDeviceSize(deviceSizes.get(browserInfo.getIosDeviceInfo().getDeviceName()));
-        }
+        this.setServerConnector(serverConnector);
         if (properties != null) {
             for (PropertyData property : properties) {
                 this.addProperty(property);
