@@ -67,4 +67,13 @@ module.exports = {
 
     'should send dom and location when check frame fully with vg': {skip: true}, // not supported by ufg
     'should send dom and location when check region by selector in frame with vg': {skip: true}, // not supported by ufg
+    'should send dom and location when check window': {skipEmit: true},
+    'should send dom and location when check window fully': {skipEmit: true},
+    'should send dom and location when check frame': {skipEmit: true},
+    'should send dom and location when check frame fully': {skipEmit: true},
+    'should send dom and location when check region by selector': {skipEmit: true},
+    'should send dom and location when check region by selector fully': {skipEmit: true},
+    'should send dom and location when check region by selector in frame': {skipEmit: true},
+    'should send dom and location when check region by selector with custom scroll root': {skipEmit: true},
+    'should send dom and location when check region by selector fully with custom scroll root': {skipEmit: true}
  }

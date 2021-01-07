@@ -432,7 +432,7 @@ public class Eyes extends EyesBase {
             ImageMatchSettings ims = MatchWindowTask.createImageMatchSettings(checkSettingsInternal, subScreenshot, this);
             Location location = subScreenshot.getLocationInScreenshot(Location.ZERO, CoordinatesType.SCREENSHOT_AS_IS);
             AppOutput appOutput = new AppOutput(name, subScreenshot, null, null, location);
-            MatchWindowData data = prepareForMatch(new ArrayList<Trigger>(), appOutput, name, false,
+            MatchWindowData data = prepareForMatch(checkSettingsInternal, new ArrayList<Trigger>(), appOutput, name, false,
                     ims, null, getAppName());
             performMatch(data);
         }

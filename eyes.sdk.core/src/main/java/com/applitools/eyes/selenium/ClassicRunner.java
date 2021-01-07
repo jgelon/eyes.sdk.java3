@@ -97,7 +97,7 @@ public class ClassicRunner extends EyesRunner {
             @Override
             public void onFail(Throwable t) {
                 GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, Type.MATCH_COMPLETE, t, testId);
-                listener.onFail();
+                matchListener.onFail();
             }
         });
         return matchListener.get();

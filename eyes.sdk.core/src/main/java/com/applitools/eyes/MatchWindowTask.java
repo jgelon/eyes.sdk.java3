@@ -380,7 +380,7 @@ public class MatchWindowTask {
         }
 
         ImageMatchSettings matchSettings = createImageMatchSettings(checkSettingsInternal, screenshot, eyes);
-        MatchWindowData data = eyes.prepareForMatch(Arrays.asList(userInputs), appOutput, tag, lastScreenshotHash != null,
+        MatchWindowData data = eyes.prepareForMatch(checkSettingsInternal, Arrays.asList(userInputs), appOutput, tag, lastScreenshotHash != null,
                 matchSettings, null, source);
         matchResult = eyes.performMatch(data);
         lastScreenshotHash = currentScreenshotHash;

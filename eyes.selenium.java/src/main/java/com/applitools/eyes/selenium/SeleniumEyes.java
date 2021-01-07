@@ -549,7 +549,7 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
             ImageMatchSettings ims = MatchWindowTask.createImageMatchSettings(checkSettingsInternal, subScreenshot, this);
             Location location = subScreenshot.getLocationInScreenshot(Location.ZERO, CoordinatesType.SCREENSHOT_AS_IS);
             AppOutput appOutput = new AppOutput(name, subScreenshot, null, null, location);
-            MatchWindowData data = prepareForMatch(new ArrayList<Trigger>(), appOutput, name, false,
+            MatchWindowData data = prepareForMatch(checkSettingsInternal, new ArrayList<Trigger>(), appOutput, name, false,
                     ims, null, source);
             performMatch(data);
         }
@@ -1740,88 +1740,6 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
             this.runner.aggregateResult(testResultContainer);
         }
         return results;
-    }
-
-    /**
-     * The type Eyes selenium agent setup.
-     */
-    class EyesSeleniumAgentSetup {
-        /**
-         * The type Web driver info.
-         */
-        class WebDriverInfo {
-            /**
-             * Gets name.
-             * @return the name
-             */
-            public String getName() {
-                return remoteWebDriver.getClass().getName();
-            }
-
-            /**
-             * Gets capabilities.
-             * @return the capabilities
-             */
-            public Capabilities getCapabilities() {
-                return remoteWebDriver.getCapabilities();
-            }
-        }
-
-        /**
-         * Instantiates a new Eyes selenium agent setup.
-         */
-        public EyesSeleniumAgentSetup() {
-            remoteWebDriver = driver.getRemoteWebDriver();
-        }
-
-        private final RemoteWebDriver remoteWebDriver;
-
-        /**
-         * Gets selenium session id.
-         * @return the selenium session id
-         */
-        public String getSeleniumSessionId() {
-            return remoteWebDriver.getSessionId().toString();
-        }
-
-        /**
-         * Gets web driver.
-         * @return the web driver
-         */
-        public WebDriverInfo getWebDriver() {
-            return new WebDriverInfo();
-        }
-
-        /**
-         * Gets stitch mode.
-         * @return the stitch mode
-         */
-        public StitchMode getStitchMode() {
-            return SeleniumEyes.this.getConfigurationInstance().getStitchMode();
-        }
-
-        /**
-         * Gets hide scrollbars.
-         * @return the hide scrollbars
-         */
-        public boolean getHideScrollbars() {
-            return SeleniumEyes.this.getConfigurationInstance().getHideScrollbars();
-        }
-
-        /**
-         * Gets force full page screenshot.
-         * @return the force full page screenshot
-         */
-        public boolean getForceFullPageScreenshot() {
-            Boolean forceFullPageScreenshot = getConfigurationInstance().getForceFullPageScreenshot();
-            if (forceFullPageScreenshot == null) return false;
-            return forceFullPageScreenshot;
-        }
-
-    }
-    @Override
-    public Object getAgentSetup() {
-        return new EyesSeleniumAgentSetup();
     }
 
     @Override

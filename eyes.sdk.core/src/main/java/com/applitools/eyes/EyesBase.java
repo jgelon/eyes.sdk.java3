@@ -585,19 +585,20 @@ public abstract class EyesBase implements IEyesBase {
      * @param imageMatchSettings The settings to use.
      * @return The match model.
      */
-    protected MatchWindowData prepareForMatch(List<Trigger> userInputs,
-                                           AppOutput appOutput,
-                                           String tag, boolean replaceLast,
-                                           ImageMatchSettings imageMatchSettings, String renderId, String source) {
+    protected MatchWindowData prepareForMatch(ICheckSettingsInternal checkSettingsInternal,
+                                              List<Trigger> userInputs,
+                                              AppOutput appOutput,
+                                              String tag, boolean replaceLast,
+                                              ImageMatchSettings imageMatchSettings, String renderId, String source) {
         String agentSetupStr = "";
-        Object agentSetup = getAgentSetup();
-        if (agentSetup != null) {
-            ObjectMapper jsonMapper = new ObjectMapper();
-            try {
-                agentSetupStr = jsonMapper.writeValueAsString(agentSetup);
-            } catch (JsonProcessingException e) {
-                GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, e, getTestId());
-            }
+        Object agentSetup = logger.createMessageFromLog(Collections.singleton(getTestId()), Stage.CHECK, null,
+                Pair.of("configuration", getConfiguration()),
+                Pair.of("checkSettings", checkSettingsInternal));
+        ObjectMapper jsonMapper = new ObjectMapper();
+        try {
+            agentSetupStr = jsonMapper.writeValueAsString(agentSetup);
+        } catch (JsonProcessingException e) {
+            GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, e, getTestId());
         }
 
         MatchWindowData.Options options = new MatchWindowData.Options(tag, userInputs.toArray(new Trigger[0]), replaceLast,

@@ -1638,14 +1638,6 @@ public class Eyes implements IEyesBase {
     }
 
     /**
-     * Gets agent setup.
-     * @return the agent setup.
-     */
-    public Object getAgentSetup() {
-        return this.seleniumEyes.getAgentSetup();
-    }
-
-    /**
      * Log.
      * @param message the massage to log
      */

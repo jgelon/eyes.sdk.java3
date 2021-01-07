@@ -100,7 +100,7 @@ public class VisualGridRunningTest extends RunningTest {
         AppOutput appOutput = new AppOutput(tag, null, domLocation, imageLocation, renderResult.getImagePositionInActiveFrame(), visualViewport);
         MatchWindowTask.collectRegions(imageMatchSettings, renderResult.getImagePositionInActiveFrame(), regions, checkTask.getRegionSelectors());
         MatchWindowTask.collectRegions(imageMatchSettings, checkSettingsInternal);
-        return prepareForMatch(new ArrayList<Trigger>(), appOutput, tag, false, imageMatchSettings, renderId, checkTask.getSource());
+        return prepareForMatch(checkSettingsInternal, new ArrayList<Trigger>(), appOutput, tag, false, imageMatchSettings, renderId, checkTask.getSource());
     }
 
     @Override
