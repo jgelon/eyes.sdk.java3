@@ -223,6 +223,7 @@ public class AppiumFullPageCaptureAlgorithm {
             // Just to make sure that we are on the top of the screen we need scroll up for a one step.
             // Because position can not be 'top' after Appium calculating last scrollable data.
             ((AppiumScrollPositionProvider) originProvider).forceScrollToTop();
+            try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
             return;
         }
 
