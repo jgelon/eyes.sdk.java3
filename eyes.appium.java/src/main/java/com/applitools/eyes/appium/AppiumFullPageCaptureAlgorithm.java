@@ -220,6 +220,9 @@ public class AppiumFullPageCaptureAlgorithm {
     protected void moveToTopLeft() {
         currentPosition = originProvider.getCurrentPosition();
         if (currentPosition.getX() <= 0 && currentPosition.getY() <= 0) {
+            // Just to make sure that we are on the top of the screen we need scroll up for a one step.
+            // Because position can not be 'top' after Appium calculating last scrollable data.
+            ((AppiumScrollPositionProvider) originProvider).forceScrollToTop();
             return;
         }
 
