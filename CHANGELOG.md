@@ -1,6 +1,7 @@
 ## [3.190.4]
 ### Updated
 - Scrollable offset calculation with updated Helper Library. [Trello 1673](https://trello.com/c/CYbkzXia)
+- DOM Capture 4.4.5. [Trello 1835](https://trello.com/c/OyWRWqJm)
 ### Fixed
 - Fixed some bugs in the dom analyzer. [Trello 2414](https://trello.com/c/45tSPCPv)
 
