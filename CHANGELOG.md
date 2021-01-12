@@ -1,3 +1,7 @@
+## [vNext]
+### Updated
+- Updated logs in visual grid tests to have a test id.
+
 ## [3.190.4]
 ### Updated
 - Scrollable offset calculation with updated Helper Library. [Trello 1673](https://trello.com/c/CYbkzXia)

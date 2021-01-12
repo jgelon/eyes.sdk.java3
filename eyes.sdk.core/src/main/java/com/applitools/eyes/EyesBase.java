@@ -46,7 +46,7 @@ public abstract class EyesBase implements IEyesBase {
 
     private MatchWindowTask matchWindowTask;
 
-    private final String testId = UUID.randomUUID().toString();
+    private String testId = UUID.randomUUID().toString();
     protected ClassicRunner runner;
     protected ServerConnector serverConnector;
     protected RunningSession runningSession;
@@ -121,6 +121,10 @@ public abstract class EyesBase implements IEyesBase {
 
     public String getTestId() {
         return testId;
+    }
+
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 
     /**

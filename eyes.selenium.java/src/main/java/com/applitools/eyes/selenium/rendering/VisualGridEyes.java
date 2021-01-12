@@ -44,6 +44,7 @@ import java.util.*;
 
 public class VisualGridEyes implements ISeleniumEyes {
     private final Logger logger;
+    private final String eyesId = UUID.randomUUID().toString();
 
     private final VisualGridRunner runner;
     final Map<String, RunningTest> testList = new HashMap<>();
@@ -152,7 +153,7 @@ public class VisualGridEyes implements ISeleniumEyes {
 
     @Override
     public WebDriver open(WebDriver driver, String appName, String testName, RectangleSize viewportSize) throws EyesException {
-        logger.log(TraceLevel.Info, new HashSet<String>(), Stage.OPEN, Type.CALLED,
+        logger.log(TraceLevel.Info, Collections.singleton(eyesId), Stage.OPEN, Type.CALLED,
                 Pair.of("appName", appName),
                 Pair.of("testName", testName),
                 Pair.of("viewportSize", viewportSize == null ? "default" : viewportSize));
@@ -218,7 +219,7 @@ public class VisualGridEyes implements ISeleniumEyes {
                 Map<String, DeviceSize> deviceSizes = serverConnector.getDevicesSizes(ServerConnector.IOS_DEVICES_PATH);
                 browserInfo.setIosDeviceSize(deviceSizes.get(browserInfo.getIosDeviceInfo().getDeviceName()));
             }
-            VisualGridRunningTest test = new VisualGridRunningTest(getConfiguration(), browserInfo, this.properties, logger, serverConnector);
+            VisualGridRunningTest test = new VisualGridRunningTest(logger, eyesId, getConfiguration(), browserInfo, this.properties, serverConnector);
             this.testList.put(test.getTestId(), test);
             newTests.add(test);
         }
@@ -292,7 +293,7 @@ public class VisualGridEyes implements ISeleniumEyes {
             return;
         }
 
-        logger.log(new HashSet<String>(), Stage.CLOSE, Type.CALLED);
+        logger.log(eyesId, Stage.CLOSE, Type.CALLED);
         isOpen = false;
         for (RunningTest runningTest : testList.values()) {
             runningTest.issueClose();
@@ -300,7 +301,7 @@ public class VisualGridEyes implements ISeleniumEyes {
     }
 
     public void abortAsync() {
-        logger.log(new HashSet<String>(), Stage.CLOSE, Type.CALLED);
+        logger.log(eyesId, Stage.CLOSE, Type.CALLED);
         for (RunningTest runningTest : testList.values()) {
             runningTest.issueAbort(new EyesException("eyes.close wasn't called. Aborted the test"), false);
         }
@@ -414,9 +415,11 @@ public class VisualGridEyes implements ISeleniumEyes {
             return;
         }
 
-        logger.log(TraceLevel.Info, new HashSet<String>(), Stage.CHECK, Type.CALLED,
+        String source = webDriver.getCurrentUrl();
+        logger.log(TraceLevel.Info, Collections.singleton(eyesId), Stage.CHECK, Type.CALLED,
                 Pair.of("configuration", getConfiguration()),
-                Pair.of("checkSettings", checkSettings));
+                Pair.of("checkSettings", checkSettings),
+                Pair.of("source", source));
         FrameChain originalFC = webDriver.getFrameChain().clone();
         EyesTargetLocator switchTo = ((EyesTargetLocator) webDriver.switchTo());
         try {
@@ -435,8 +438,6 @@ public class VisualGridEyes implements ISeleniumEyes {
             trySetTargetSelector(seleniumCheckSettings);
 
             checkSettingsInternal = updateCheckSettings(checkSettings);
-
-            String source = webDriver.getCurrentUrl();
             Map<Integer, List<RunningTest>> requiredWidths = mapRunningTestsToRequiredBrowserWidth(seleniumCheckSettings);
             if (requiredWidths.isEmpty()) {
                 captureDomForResourceCollection(0, testList.values(), switchTo, checkSettingsInternal, regionsXPaths, source);

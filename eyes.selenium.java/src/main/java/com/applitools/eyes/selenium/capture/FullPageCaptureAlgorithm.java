@@ -205,7 +205,11 @@ public class FullPageCaptureAlgorithm {
         }
 
         fullarea = coerceImageSize(fullarea);
-        logger.log(testId, Stage.CHECK, Type.CAPTURE_SCREENSHOT, Pair.of("finalFullArea", fullarea));
+        logger.log(testId, Stage.CHECK, Type.CAPTURE_SCREENSHOT,
+                Pair.of("finalFullArea", fullarea),
+                Pair.of("screenshotPartSize", screenshotPartSize),
+                Pair.of("stitchingOverlap", stitchingOverlap),
+                Pair.of("rectInScreenshot", new Region(rectInScreenshot)));
         SubregionForStitching[] screenshotParts = fullarea.getSubRegions(screenshotPartSize, stitchingOverlap, pixelRatio, rectInScreenshot, logger);
 
         BufferedImage stitchedImage = new BufferedImage(fullarea.getWidth(), fullarea.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
@@ -275,6 +279,10 @@ public class FullPageCaptureAlgorithm {
 
             Point partPastePosition = partRegion.getPastePhysicalLocation();
             partPastePosition.translate(dx, dy);
+            logger.log(TraceLevel.Info, Collections.singleton(testId), Stage.CHECK, Type.CAPTURE_SCREENSHOT,
+                    Pair.of("scrollPosition", scrollPosition),
+                    Pair.of("originPosition", originPosition),
+                    Pair.of("pastePhysicalLocation", new Location(partPastePosition)));
 
             // Actually taking the screenshot.
             try {
@@ -298,7 +306,6 @@ public class FullPageCaptureAlgorithm {
 
             debugScreenshotsProvider.save(partImage, "partImage-" + originPosition.getX() + "_" + originPosition.getY());
             debugScreenshotsProvider.save(scaledCroppedPartImage, "scaledCroppedPartImage-" + partPastePosition.getX() + "_" + partPastePosition.getY());
-            logger.log(TraceLevel.Info, Collections.singleton(testId), Stage.CHECK, Type.CAPTURE_SCREENSHOT,Pair.of("partPastePosition", partPastePosition));
             stitchedImage.getRaster().setRect(partPastePosition.x, partPastePosition.y, scaledCroppedPartImage.getData());
             index++;
         }
