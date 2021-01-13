@@ -46,7 +46,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
             Point scrollLoc = activeScroll.getLocation();
             scrollableViewLoc = new Location(scrollLoc.x, scrollLoc.y);
         }
-        logger.log(TraceLevel.Debug, null, Stage.CHECK, Pair.of("location", scrollableViewLoc));
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK, Pair.of("location", scrollableViewLoc));
         return scrollableViewLoc;
     }
 
@@ -68,7 +68,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
         } else {
             pos = new Location(curScrollPos.getX(), curScrollPos.getY());
         }
-        logger.log(TraceLevel.Debug, null, Stage.CHECK, Pair.of("currentPosition", pos));
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK, Pair.of("currentPosition", pos));
         return pos;
     }
 
@@ -83,7 +83,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
             pos = new Location(curScrollPos.getX(), curScrollPos.getY() - getStatusBarHeight());
         }
 
-        logger.log(TraceLevel.Debug, null, Stage.CHECK, Pair.of("currentPosition", pos));
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK, Pair.of("currentPosition", pos));
         return pos;
     }
 
@@ -162,7 +162,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
 
     @Override
     public void scrollTo(int startX, int startY, int endX, int endY, boolean shouldCancel) {
-        logger.log(TraceLevel.Debug, null, Stage.CHECK,
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
                 Pair.of("from", new Location(startX, startY)),
                 Pair.of("to", new Location(startX, startY)));
         TouchAction scrollAction = new TouchAction(driver);
@@ -221,6 +221,8 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
                 element.getSize().getWidth(),
                 element.getSize().getHeight());
         if (shouldStitchContent) {
+            logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
+                    Pair.of("elementClass", element.getAttribute("className")));
             double devicePixelRatio = eyesDriver.getDevicePixelRatio();
             ContentSize contentSize = EyesAppiumUtils.getContentSize(driver, element);
             region = new Region(contentSize.left,
@@ -252,7 +254,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
     }
 
     private Location getScrollPosFromScrollData(ContentSize contentSize, LastScrollData scrollData, int supposedScrollAmt, boolean isDown) {
-        logger.log(TraceLevel.Debug, null, Stage.CHECK,
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
                 Pair.of("scrollData", scrollData),
                 Pair.of("contentSize", contentSize));
 
@@ -324,6 +326,8 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
             } else {
                 activeScroll = getFirstScrollableView();
             }
+            logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
+                    Pair.of("elementClass", activeScroll.getAttribute("className")));
             String className = activeScroll.getAttribute("className");
 
             if (className.equals("android.support.v7.widget.RecyclerView") ||
@@ -338,12 +342,13 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
                     } catch (NumberFormatException e) {
                         GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, e);
                     }
-                } catch (NoSuchElementException | StaleElementReferenceException ignored) {
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
                     if (contentSize.scrollableOffset > 0) {
                         scrollableHeight = contentSize.scrollableOffset;
                     } else {
                         scrollableHeight = contentSize.height;
                     }
+                    GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, e);
                 }
             }
         } catch (NoSuchElementException e) {
@@ -355,7 +360,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
         int outsideScrollviewHeight = windowHeight - contentSize.height;
         entireSize = new RectangleSize(contentSize.width,
                 scrollContentHeight + outsideScrollviewHeight + verticalScrollGap);
-        logger.log(TraceLevel.Debug, null, Stage.CHECK,
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
                 Pair.of("entireSize", entireSize),
                 Pair.of("verticalScrollGap", verticalScrollGap),
                 Pair.of("scrollContentHeight", scrollContentHeight));
@@ -384,7 +389,7 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
 
     private String getScrollableContentSize(String resourceId) {
         String scrollableContentSize = "";
-        String[] version = EyesAppiumUtils.getHelperLibraryVersion(eyesDriver).split("\\.");
+        String[] version = EyesAppiumUtils.getHelperLibraryVersion(eyesDriver, logger).split("\\.");
         MobileElement hiddenElement;
         if (version.length == 3 &&
                 Integer.parseInt(version[0]) >= 1 &&
@@ -404,6 +409,8 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
                 scrollableContentSize = hiddenElement.getText();
             }
         }
+        logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
+                Pair.of("scrollableHeightFromHelper", scrollableContentSize));
         return scrollableContentSize;
     }
 }
