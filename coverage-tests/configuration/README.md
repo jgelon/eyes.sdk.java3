@@ -16,5 +16,5 @@
  - yarn report:prod - command send the report to QA production dashboard
  - yarn move:report - move the report generated from the testng run, from the target directory to the current working directory (DIR_PATH/eyes.selenium.java/). During the reporting JS tool will look for the 2 files, coverage-test-report.xml
 coverage-tests-metadata.json which should be at cwd.
- - mvn test -DsuiteFile=genericTestsSuite.xml - is command which run the generic tests testng suite. 
+ - mvn test - is command which run the generic tests testng suite. 
 
