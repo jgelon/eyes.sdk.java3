@@ -7,7 +7,7 @@ import com.applitools.eyes.visualgrid.services.RunnerOptions;
 
 import java.util.*;
 
-public class AsyncClassicRunner extends EyesRunner implements IClassicRunner {
+public class AsyncClassicRunner extends EyesRunner {
 
     private ClassicServiceRunner serviceRunner;
     protected final Map<String, RunningTest> runningTests = Collections.synchronizedMap(new HashMap<String, RunningTest>());

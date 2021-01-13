@@ -72,6 +72,10 @@ public class VisualGridRunner extends EyesRunner {
         serviceRunner.addResourceCollectionTask(domData, checkTasks);
     }
 
+    public synchronized void check(byte[] mobileResources, String contentType, List<CheckTask> checkTasks) {
+        serviceRunner.addNativeMobileResources(mobileResources, contentType, checkTasks);
+    }
+
     public TestResultsSummary getAllTestResultsImpl(boolean throwException) {
         boolean isRunning = true;
         while (isRunning && getError() == null) {

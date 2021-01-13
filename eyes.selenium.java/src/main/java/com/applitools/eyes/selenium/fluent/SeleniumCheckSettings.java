@@ -15,7 +15,6 @@ import com.applitools.eyes.serializers.BySerializer;
 import com.applitools.eyes.serializers.WebElementSerializer;
 import com.applitools.eyes.visualgrid.model.VisualGridSelector;
 import com.applitools.utils.ArgumentGuard;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.openqa.selenium.By;
@@ -27,11 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SeleniumCheckSettings extends CheckSettings implements ISeleniumCheckTarget, Cloneable {
-    public static final String FULL_PAGE = "full-page";
-    public static final String VIEWPORT = "viewport";
-    public static final String REGION = "region";
-    public static final String SELECTOR = "selector";
-    public static final String FULL_SELECTOR = "full-selector";
     @JsonSerialize(using = BySerializer.class)
     private By targetSelector;
     @JsonSerialize(using = WebElementSerializer.class)

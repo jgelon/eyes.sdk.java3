@@ -21,16 +21,19 @@ public class VisualGridRunningTest extends RunningTest {
     private final Configuration configuration;
     private JobInfo jobInfo;
 
-    public VisualGridRunningTest(Logger logger, String eyesId, RenderBrowserInfo browserInfo, Configuration configuration) {
+    private final boolean isWeb;
+
+    public VisualGridRunningTest(Logger logger, boolean isWeb, String eyesId, RenderBrowserInfo browserInfo, Configuration configuration) {
         super(browserInfo, logger);
         setTestId(String.format("%s/%s", eyesId, getTestId()));
         logger.log(getTestId(), Stage.GENERAL, Pair.of("browserInfo", browserInfo));
         this.configuration = configuration;
+        this.isWeb = isWeb;
     }
 
-    public VisualGridRunningTest(Logger logger, String eyesId, Configuration configuration, RenderBrowserInfo browserInfo,
+    public VisualGridRunningTest(Logger logger, boolean isWeb, String eyesId, Configuration configuration, RenderBrowserInfo browserInfo,
                                  List<PropertyData> properties, ServerConnector serverConnector) {
-        this(logger, eyesId, browserInfo, configuration);
+        this(logger, isWeb, eyesId, browserInfo, configuration);
         this.setServerConnector(serverConnector);
         if (properties != null) {
             for (PropertyData property : properties) {
@@ -83,14 +86,17 @@ public class VisualGridRunningTest extends RunningTest {
                 Pair.of("configuration", getConfiguration()),
                 Pair.of("checkSettings", checkSettingsInternal));
         ImageMatchSettings imageMatchSettings = MatchWindowTask.createImageMatchSettings(checkSettingsInternal, this);
-        MatchWindowTask.collectRegions(imageMatchSettings, renderResult.getImagePositionInActiveFrame(), regions, checkTask.getRegionSelectors());
-        MatchWindowTask.collectRegions(imageMatchSettings, checkSettingsInternal);
+        if (isWeb) {
+            MatchWindowTask.collectRegions(imageMatchSettings, renderResult.getImagePositionInActiveFrame(), regions, checkTask.getRegionSelectors());
+            MatchWindowTask.collectRegions(imageMatchSettings, checkSettingsInternal);
+        }
         return prepareForMatch(checkSettingsInternal, new ArrayList<Trigger>(), checkTask.getAppOutput(), checkSettingsInternal.getName(), false, imageMatchSettings, renderId, checkTask.getSource());
     }
 
     @Override
     protected String getBaseAgentId() {
-        return "eyes.selenium.visualgrid.java/" + ClassVersionGetter.CURRENT_VERSION;
+        String moduleName = isWeb ? "selenium" : "appium";
+        return String.format("eyes.%s.visualgrid.java/%s", moduleName, ClassVersionGetter.CURRENT_VERSION);
     }
 
     public String tryCaptureDom() {
@@ -109,7 +115,8 @@ public class VisualGridRunningTest extends RunningTest {
         SyncTaskListener<JobInfo[]> listener = new SyncTaskListener<>(logger, String.format("getJobInfo %s", browserInfo));
         RenderInfo renderInfo = new RenderInfo(browserInfo.getWidth(), browserInfo.getHeight(), null, null,
                 null, browserInfo.getEmulationInfo(), browserInfo.getIosDeviceInfo());
-        RenderRequest renderRequest = new RenderRequest(renderInfo, browserInfo.getPlatform(), browserInfo.getBrowserType());
+        String platformType = isWeb ? "web" : "native";
+        RenderRequest renderRequest = new RenderRequest(renderInfo, browserInfo.getPlatform(), platformType, browserInfo.getBrowserType());
         renderRequest.setTestId(getTestId());
         getServerConnector().getJobInfo(listener, new RenderRequest[]{renderRequest});
         JobInfo[] jobInfos = listener.get();
