@@ -368,6 +368,10 @@ public class AppiumFullPageCaptureAlgorithm {
         // Saving the original position (in case we were already in the outermost frame).
         originalPosition = originProvider.getState();
 
+        // Extra pause to wait for application actions will be finished.
+        // Moving from one screen to another for example
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+
         // first, scroll to the origin and get the top left screenshot
         BufferedImage image = getTopLeftScreenshot();
         logger.log(testId, Stage.CHECK, Type.CAPTURE_SCREENSHOT,
