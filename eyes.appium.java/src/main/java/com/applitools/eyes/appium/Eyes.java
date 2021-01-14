@@ -684,7 +684,7 @@ public class Eyes extends RunningTest {
     protected EyesAppiumScreenshot getSimpleScreenshot() {
         // Extra pause to wait for application actions will be finished.
         // Moving from one screen to another for example or wait untill scrollbars becomes unvisible
-        try { Thread.sleep(500); } catch (InterruptedException ignored) {}
+        try { Thread.sleep(600); } catch (InterruptedException ignored) {}
 
         ScaleProviderFactory scaleProviderFactory = updateScalingParams();
         BufferedImage screenshotImage = imageProvider.getImage();
