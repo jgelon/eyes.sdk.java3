@@ -541,7 +541,7 @@ public class Eyes extends RunningTest {
 
         // Extra pause to wait for application actions will be finished.
         // Moving from one screen to another for example or wait untill scrollbars becomes unvisible
-        try { Thread.sleep(500); } catch (InterruptedException ignored) {}
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
 
         if (getForceFullPageScreenshot() || stitchContent) {
             result = getFullPageScreenshot();
