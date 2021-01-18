@@ -1,6 +1,7 @@
 ## [vNext]
 ### Updated
 - Dom Snapshot 4.4.8. [Trello 1835](https://trello.com/c/OyWRWqJm)
+- Added support in Samsung Galaxy S20. [Trello 2425](https://trello.com/c/mp0NMJpq)
 - Fill system bars with default method if we encountered exceptions from Appium Client. [Trello 2339](https://trello.com/c/AjbgFdZe)
 - Logs in appium tests to have a test it. [Trello 2407](https://trello.com/c/TnOWFgya)
 ### Fixed

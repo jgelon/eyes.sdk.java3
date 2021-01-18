@@ -1,5 +1,6 @@
 package com.applitools.eyes.visualgrid.model;
 
+import com.applitools.connectivity.MockServerConnector;
 import com.applitools.connectivity.ServerConnector;
 import com.applitools.eyes.*;
 import com.applitools.eyes.utils.ReportingTestSuite;
@@ -31,6 +32,39 @@ public class TestRenderingTask extends ReportingTestSuite {
 
     public TestRenderingTask() {
         super.setGroupName("core");
+    }
+
+    @Test
+    public void testResourceParserLimit() {
+        FrameData frameData = new FrameData();
+        frameData.setUrl("http://google.com");
+        frameData.setResourceUrls(new ArrayList<String>());
+        frameData.setFrames(new ArrayList<FrameData>());
+        frameData.setBlobs(new ArrayList<BlobData>());
+        DomAnalyzer domAnalyzer = new DomAnalyzer(new Logger(), new MockServerConnector(), new NullDebugResourceWriter(), frameData, new HashMap<String, RGridResource>(), new TaskListener<Map<String, RGridResource>>() {
+            @Override
+            public void onComplete(Map<String, RGridResource> taskResponse) {
+            }
+
+            @Override
+            public void onFail() {
+            }
+        });
+
+        for (int i = 0; i < 200; i++) {
+            RGridResource resource = mock(RGridResource.class);
+            when(resource.getUrl()).thenReturn(String.format("http://%d.com", i));
+            when(resource.parse(ArgumentMatchers.<Logger>any(), anyString())).thenAnswer(new Answer<Set<URI>>() {
+                @Override
+                public Set<URI> answer(InvocationOnMock invocation) throws Throwable {
+                    Thread.sleep(500);
+                    return new HashSet<>();
+                }
+            });
+            domAnalyzer.resourcesToParse.add(Pair.of(frameData, resource));
+        }
+
+        while (!domAnalyzer.run());
     }
 
     @Test
