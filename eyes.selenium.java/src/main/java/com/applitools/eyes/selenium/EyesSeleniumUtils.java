@@ -191,7 +191,7 @@ public class EyesSeleniumUtils {
 
         Map<String, Object> pollingScriptArguments = new HashMap<>();
 
-        int chunkByteLength = userAgent.getOS().toLowerCase().contains("ios") ? 10 * 1024 * 1024 : 256 * 1024 * 1024;
+        int chunkByteLength = userAgent.getOS().toLowerCase().contains("ios") ? 10 * 1024 * 1024 : 240 * 1024 * 1024;
         domScriptArguments.put("chunkByteLength", chunkByteLength);
         pollingScriptArguments.put("chunkByteLength", chunkByteLength);
         ObjectMapper mapper = new ObjectMapper();

@@ -1,3 +1,7 @@
+## [vNext]
+### Updated
+- `chunkBytesLemgth` parameter for DS is not 240 MB. [Trello 2415](https://trello.com/c/fI3Meo5c)
+
 ## [3.191.1]
 ### Fixed
 - Fixed a bug in the selenium full page algorithm. [Trello 2223](https://trello.com/c/bHwlpmuX) [Trello 2416](https://trello.com/c/4NDa6Vxl)
