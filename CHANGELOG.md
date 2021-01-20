@@ -1,6 +1,6 @@
-## [vNext]
+## [3.191.2]
 ### Updated
-- `chunkBytesLemgth` parameter for DS is not 240 MB. [Trello 2415](https://trello.com/c/fI3Meo5c)
+- `chunkBytesLemgth` parameter for DS is now 240 MB. [Trello 2415](https://trello.com/c/fI3Meo5c)
 
 ## [3.191.1]
 ### Fixed
