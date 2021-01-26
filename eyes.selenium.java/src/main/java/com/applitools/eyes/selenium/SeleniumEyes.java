@@ -1085,6 +1085,7 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
         if (userDefinedSRE != null) {
             Region sreInnerBounds = EyesRemoteWebElement.getClientBoundsWithoutBorders(userDefinedSRE, driver);
             viewport.intersect(sreInnerBounds);
+            logger.log(getTestId(), Stage.CHECK, Pair.of("intersectedViewport", viewport));
         }
         Location offset = Location.ZERO;
         for (Frame frame : frameChain) {
@@ -1098,6 +1099,8 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
             frameSreInnerBounds = frameSreInnerBounds.offset(offset);
             viewport.intersect(frameSreInnerBounds);
         }
+
+        logger.log(getTestId(), Stage.CHECK, Pair.of("effectiveViewport", viewport));
         return viewport;
     }
 
