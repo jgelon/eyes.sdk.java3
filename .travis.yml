@@ -113,8 +113,17 @@ jobs:
           fi
     - name: Tutorials
       script:
-        - echo $APPLITOOLS_REPORT_ID
-        - ./eyes.selenium.java/tutorials/run.sh
+        - "export DISPLAY=:99.0"
+        - "sh -e /etc/init.d/xvfb start"
+        - sleep 3 # give xvfb some time to start
+        - mvn clean install -DskipTests
+        - latestChromeDriverURL=$(wget http://chromedriver.storage.googleapis.com/LATEST_RELEASE -q -O -)
+        - wget "http://chromedriver.storage.googleapis.com/${latestChromeDriverURL}/chromedriver_linux64.zip"
+        - unzip chromedriver_linux64.zip -d /home/travis/bin
+        - chmod +x /home/travis/bin/chromedriver
+        - ./eyes.selenium.java/tutorials/build.sh
+        - ./eyes.selenium.java/tutorials/run.sh || travis_terminate 1;
+        - ./eyes.selenium.java/tutorials/report.sh
     - stage: Test Appium IOS
       if: type != cron
       script:

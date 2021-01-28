@@ -3,8 +3,8 @@
 set -e
 DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
-$DIR/build.sh
 echo run.sh
-docker run -e APPLITOOLS_API_KEY tutorial_java_basic
-docker run -e APPLITOOLS_API_KEY tutorial_java_ufg
-$DIR/report.sh
+cd $DIR/tmp/tutorial-selenium-java-basic
+mvn -Dtest=BasicDemo test
+cd $DIR/tmp/tutorial-selenium-java-ultrafastgrid
+mvn install exec:java -Dexec.mainClass="com.applitools.quickstarts.AppTest"  -Dexec.classpathScope=test -Dmaven.compiler.source="1.7" -Dmaven.compiler.target="1.7"
