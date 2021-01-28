@@ -2,7 +2,6 @@ language: java
 
 services:
   - docker
-  - xvfb
 
 jdk: oraclejdk8
 
