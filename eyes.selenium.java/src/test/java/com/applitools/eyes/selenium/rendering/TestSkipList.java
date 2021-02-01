@@ -35,7 +35,7 @@ public class TestSkipList extends ReportingTestSuite {
     }
 
     @Test
-    public void testSkipList() throws InterruptedException {
+    public void testSkipList() throws Exception {
         final List<Set<String>> resourceMaps = new ArrayList<>();
 
         ServerConnector serverConnector = spy(new ServerConnector());
@@ -92,11 +92,11 @@ public class TestSkipList extends ReportingTestSuite {
         expectedUrls.add("https://applitools.github.io/demo/TestPages/VisualGridTestPage/style1.css");
         expectedUrls.add("https://fonts.googleapis.com/css?family=Raleway");
         expectedUrls.add("https://fonts.googleapis.com/css?family=Unlock");
-        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCFPrEHJA.woff2");
-        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCGPrEHJA.woff2");
-        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCHPrEHJA.woff2");
-        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2");
-        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCMPrEHJA.woff2");
+        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCFPrEHJA.woff2");
+        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCGPrEHJA.woff2");
+        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCHPrEHJA.woff2");
+        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2");
+        expectedUrls.add("https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCMPrEHJA.woff2");
         expectedUrls.add("https://fonts.gstatic.com/s/unlock/v10/7Au-p_8ykD-cDl72LwLT.woff2");
         expectedUrls.add("https://use.fontawesome.com/releases/v5.8.2/css/all.css");
         expectedUrls.add("https://use.fontawesome.com/releases/v5.8.2/webfonts/fa-brands-400.eot");
