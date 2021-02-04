@@ -16,7 +16,9 @@ import com.applitools.eyes.utils.TestUtils;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class TestSetup extends GlobalSetup {
@@ -82,6 +84,14 @@ public class TestSetup extends GlobalSetup {
                 Assert.fail("Exception appeared while getting session results");
             }
         return sessionResults;
+    }
+
+    public void setBatch(String name, HashMap<String, String>[] properties) {
+        BatchInfo batch = new BatchInfo(name);
+        for (Map<String, String> property : properties) {
+            batch.addProperty(property.get("name"), property.get("value"));
+        }
+        eyes.setBatch(batch);
     }
 
     public JsonNode getDom(TestResults results, String domId) {

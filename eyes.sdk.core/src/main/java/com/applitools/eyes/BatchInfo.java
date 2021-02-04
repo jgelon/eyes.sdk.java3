@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 /**
@@ -33,6 +31,9 @@ public class BatchInfo {
 
     @JsonProperty("isCompleted")
     private boolean isCompleted = false;
+
+    @JsonProperty("properties")
+    private final List<Map<String, String>> properties = new ArrayList<>();
 
     /**
      * Creates a new BatchInfo instance.
@@ -171,5 +172,15 @@ public class BatchInfo {
     @JsonInclude
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public BatchInfo addProperty(final String name, final String value) {
+        properties.add(new HashMap<String, String>() {{put("name", name);put("value", value);}});
+        return this;
+    }
+
+    @JsonIgnore
+    public List<Map<String, String>> getProperties() {
+        return this.properties;
     }
 }
