@@ -1,4 +1,4 @@
-## [vNext]
+## [3.193.0]
 ### Added
 - Supporting OCR Feature. [Trello 2440](https://trello.com/c/FLGKnqIS)
 - Scroll root element functionality for iOS. [Trello 2347](https://trello.com/c/FDZ1oWF9)

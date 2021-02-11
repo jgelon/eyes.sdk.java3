@@ -7,7 +7,6 @@
     <name>coverage-tests</name>
     <url>http://www.applitools.com</url>
 
-
     <properties>
         <defaultSuiteFiles>
             genericTestsSuite.xml
@@ -19,7 +18,7 @@
     <parent>
         <groupId>com.applitools</groupId>
         <artifactId>eyes-sdk-java3-parent</artifactId>
-        <version>3.192.0</version>
+        <version>3.193.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -27,17 +26,17 @@
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-appium-java3</artifactId>
-            <version>3.192.0</version>
+            <version>3.193.0</version>
         </dependency>
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
-            <version>3.192.0</version>
+            <version>3.193.0</version>
         </dependency>
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-sdk-core-java3</artifactId>
-            <version>3.192.0</version>
+            <version>3.193.0</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
