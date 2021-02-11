@@ -5,12 +5,14 @@ package com.applitools.eyes.images;
 
 import com.applitools.ICheckSettings;
 import com.applitools.eyes.*;
+import com.applitools.eyes.capture.ScreenshotProvider;
 import com.applitools.eyes.config.Configuration;
 import com.applitools.eyes.config.IConfiguration;
 import com.applitools.eyes.events.ValidationResult;
 import com.applitools.eyes.exceptions.TestFailedException;
 import com.applitools.eyes.fluent.CheckSettings;
 import com.applitools.eyes.fluent.ICheckSettingsInternal;
+import com.applitools.eyes.locators.BaseOcrRegion;
 import com.applitools.eyes.logging.Stage;
 import com.applitools.eyes.logging.TraceLevel;
 import com.applitools.eyes.logging.Type;
@@ -42,6 +44,11 @@ public class Eyes extends EyesBase implements IConfiguration {
      */
     public String getBaseAgentId() {
         return "eyes.images.java/" + ClassVersionGetter.CURRENT_VERSION;
+    }
+
+    @Override
+    protected ScreenshotProvider getScreenshotProvider() {
+        return null;
     }
 
     public String tryCaptureDom() {
@@ -807,5 +814,12 @@ public class Eyes extends EyesBase implements IConfiguration {
 
     public void setConfiguration(Configuration config) {
         this.config = new Configuration(config);
+    }
+
+    @Override
+    protected void getAppOutputForOcr(BaseOcrRegion ocrRegion) {
+        BufferedImage image = ((OcrRegion) ocrRegion).getImage();
+        ImagesCheckSettings imagesCheckSettings = (ImagesCheckSettings) Target.image(image);
+        checkImage_(RegionProvider.NULL_INSTANCE, image, "", imagesCheckSettings.ocrRegion(ocrRegion));
     }
 }

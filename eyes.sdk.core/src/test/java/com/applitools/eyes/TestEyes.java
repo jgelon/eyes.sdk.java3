@@ -1,7 +1,9 @@
 package com.applitools.eyes;
 
+import com.applitools.eyes.capture.ScreenshotProvider;
 import com.applitools.eyes.config.Configuration;
 import com.applitools.eyes.fluent.ICheckSettingsInternal;
+import com.applitools.eyes.locators.BaseOcrRegion;
 
 public class TestEyes extends EyesBase {
     private Configuration configuration = new Configuration();
@@ -11,6 +13,14 @@ public class TestEyes extends EyesBase {
 
     @Override
     protected String getBaseAgentId() {
+        return null;
+    }
+
+    @Override
+    protected void getAppOutputForOcr(BaseOcrRegion ocrRegion) {}
+
+    @Override
+    protected ScreenshotProvider getScreenshotProvider() {
         return null;
     }
 
