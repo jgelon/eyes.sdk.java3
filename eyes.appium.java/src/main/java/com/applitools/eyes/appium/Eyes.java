@@ -37,6 +37,7 @@ import com.applitools.eyes.selenium.regionVisibility.NopRegionVisibilityStrategy
 import com.applitools.eyes.selenium.regionVisibility.RegionVisibilityStrategy;
 import com.applitools.utils.*;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.*;
@@ -66,7 +67,7 @@ public class Eyes extends EyesBase {
     private ImageRotation rotation;
     protected WebElement targetElement = null;
     private PropertyHandler<RegionVisibilityStrategy> regionVisibilityStrategyHandler;
-    private String scrollRootElementId = null;
+    private WebElement scrollRootElement = null;
 
     public Eyes() {
         super(new ClassicRunner());
@@ -447,7 +448,7 @@ public class Eyes extends EyesBase {
 
         if (checkSettings instanceof AppiumCheckSettings) {
             updateCutElement((AppiumCheckSettings) checkSettings);
-            this.scrollRootElementId = getScrollRootElementId((AppiumCheckSettings) checkSettings);
+            this.scrollRootElement = getScrollRootElement((AppiumCheckSettings) checkSettings);
         }
 
         if (getIsDisabled()) {
@@ -701,7 +702,7 @@ public class Eyes extends EyesBase {
         AppiumCaptureAlgorithmFactory algoFactory = new AppiumCaptureAlgorithmFactory(driver, logger, getTestId(),
                 scrollPositionProvider, imageProvider, debugScreenshotsProvider, scaleProviderFactory,
                 cutProviderHandler.get(), screenshotFactory, getConfigurationInstance().getWaitBeforeScreenshots(), cutElement,
-                getStitchOverlap(), scrollRootElementId);
+                getStitchOverlap(), scrollRootElement);
 
         AppiumFullPageCaptureAlgorithm algo = algoFactory.getAlgorithm();
 
@@ -965,18 +966,17 @@ public class Eyes extends EyesBase {
         return new EyesAppiumAgentSetup();
     }
 
-    private String getScrollRootElementId(AppiumCheckSettings checkSettings) {
-        String scrollRootElementId = checkSettings.getScrollRootElementId();
-        if (scrollRootElementId == null) {
-            WebElement webElement = checkSettings.getScrollRootElement();
-            if (webElement == null && checkSettings.getScrollRootElementSelector() != null) {
-                webElement = driver.findElement(checkSettings.getScrollRootElementSelector());
+    private WebElement getScrollRootElement(AppiumCheckSettings checkSettings) {
+        scrollRootElement = checkSettings.getScrollRootElement();
+        if (scrollRootElement == null) {
+            if (checkSettings.getScrollRootElementSelector() != null) {
+                scrollRootElement = driver.findElement(checkSettings.getScrollRootElementSelector());
             }
-            if (webElement != null) {
-                scrollRootElementId = webElement.getAttribute("resourceId").split("/")[1];
+            if (scrollRootElement == null && checkSettings.getScrollRootElementId() != null) {
+                scrollRootElement = driver.findElement(MobileBy.id(checkSettings.getScrollRootElementId()));
             }
         }
-        return scrollRootElementId;
+        return scrollRootElement;
     }
 
     class EyesAppiumAgentSetup {
