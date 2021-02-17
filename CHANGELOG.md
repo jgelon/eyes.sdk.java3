@@ -1,6 +1,8 @@
 ## [vNext]
 ### Added
 -  The `USE_PREDEFINED_DEVICE_INFO` feature now use viewport height and status bar height from server. [Trello 2307](https://trello.com/c/8VCtSmfN)
+### Fixed
+- A potential synchronization issue with the dom analyzer.
 
 ## [3.193.0]
 ### Added
