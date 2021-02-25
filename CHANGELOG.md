@@ -1,4 +1,4 @@
-## [3.193.2]
+## [3.194.0]
 ### Added
 - Users can now use a separated proxy for networks requests which aren't sent to Applitools servers. [Trello 2449](https://trello.com/c/xVScV0PP) 
 
