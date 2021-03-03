@@ -1,4 +1,4 @@
-## [vNext]
+## [3.195.0]
 ### Added
 - Resource collection optimizations.
 - Logs for dom analyzer.
