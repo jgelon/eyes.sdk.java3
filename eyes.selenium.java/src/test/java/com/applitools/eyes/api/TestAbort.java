@@ -2,6 +2,7 @@ package com.applitools.eyes.api;
 
 import com.applitools.eyes.EyesRunner;
 import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.StdoutLogHandler;
 import com.applitools.eyes.config.Configuration;
 import com.applitools.eyes.selenium.BrowserType;
 import com.applitools.eyes.selenium.ClassicRunner;
@@ -12,15 +13,9 @@ import com.applitools.eyes.utils.ReportingTestSuite;
 import com.applitools.eyes.utils.SeleniumUtils;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Factory;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class TestAbort extends ReportingTestSuite {
-
-    private WebDriver driver;
-    private Eyes eyes;
     private EyesRunner runner;
     private final boolean useVisualGrid;
 
@@ -32,12 +27,16 @@ public class TestAbort extends ReportingTestSuite {
     }
 
     @BeforeClass
-    public void SetUp() {
-        driver = SeleniumUtils.createChromeDriver();
-        driver.get("data:text/html,<p>Test</p>");
+    public void beforeClass() {
         runner = useVisualGrid ? new VisualGridRunner(10) : new ClassicRunner();
-        eyes = new Eyes(runner);
+    }
+
+    public Eyes setUp() {
+        WebDriver driver = SeleniumUtils.createChromeDriver();
+        driver.get("data:text/html,<p>Test</p>");
+        Eyes eyes = new Eyes(runner);
         eyes.setBatch(TestDataProvider.batchInfo);
+        eyes.setLogHandler(new StdoutLogHandler());
         String testName = useVisualGrid ? "Test Abort_VG" : "Test Abort";
 
         Configuration config = eyes.getConfiguration();
@@ -45,22 +44,42 @@ public class TestAbort extends ReportingTestSuite {
         eyes.setConfiguration(config);
 
         eyes.open(driver, testName, testName, new RectangleSize(1200, 800));
+        return eyes;
+    }
+
+    public void tearDown(Eyes eyes) {
+        eyes.getDriver().quit();
     }
 
     @AfterClass
-    public void TearDown() {
-        driver.quit();
+    public void afterClass() {
         runner.getAllTestResults(false);
     }
 
     @Test
-    public void TestAbortIfNotClosed() {
+    public void TestAbortIfNotClosed() throws InterruptedException {
+        Eyes eyes = setUp();
         eyes.check(useVisualGrid ? "VG" : "SEL", Target.window());
-        try {
-            Thread.sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(5000);
         eyes.abortIfNotClosed();
+        tearDown(eyes);
+    }
+
+    @Test
+    public void TestAbortAsyncIfNotClosed() throws InterruptedException {
+        Eyes eyes = setUp();
+        eyes.check(useVisualGrid ? "VG" : "SEL", Target.window());
+        Thread.sleep(5000);
+        eyes.closeAsync();
+        eyes.abortAsync();
+        tearDown(eyes);
+    }
+
+    @Test
+    public void TestAbortIfNotClosedAndNotAborted() throws InterruptedException {
+        Eyes eyes = setUp();
+        eyes.check(useVisualGrid ? "VG" : "SEL", Target.window());
+        Thread.sleep(5000);
+        tearDown(eyes);
     }
 }
