@@ -304,7 +304,7 @@ public class VisualGridEyes implements ISeleniumEyes {
     public void abortAsync() {
         logger.log(eyesId, Stage.CLOSE, Type.CALLED);
         for (RunningTest runningTest : testList.values()) {
-            runningTest.issueAbort(new EyesException("eyes.close wasn't called. Aborted the test"), false);
+            runningTest.issueAbort(new EyesException(String.format("Didn't close test %s. Aborted the test", getConfiguration().getTestName())), false);
         }
     }
 

@@ -45,15 +45,15 @@ public class TestVisualGridRunner {
 
     @Test
     public void testOpenBeforeRender() {
-        final VisualGridRunner runner = new VisualGridRunner(10);
+        final EyesRunner runner = new VisualGridRunner(10);
 
+        final Eyes eyes = new Eyes(runner);
         final AtomicReference<String> errorMessage = new AtomicReference<>();
         ServerConnector serverConnector = spy(new MockServerConnector());
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                IEyes eyes = runner.allEyes.iterator().next();
-                if (!eyes.getAllRunningTests().values().iterator().next().getIsOpen()) {
+                if (!eyes.getIsOpen()) {
                     errorMessage.set("Render called before open");
                 }
 
@@ -62,7 +62,6 @@ public class TestVisualGridRunner {
             }
         }).when(serverConnector).render(ArgumentMatchers.<TaskListener<List<RunningRender>>>any(), ArgumentMatchers.<List<RenderRequest>>any());
 
-        Eyes eyes = new Eyes(runner);
         eyes.setLogHandler(new StdoutLogHandler());
         Configuration configuration = eyes.getConfiguration();
         configuration.addBrowser(new IosDeviceInfo(IosDeviceName.iPhone_7));
