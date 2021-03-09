@@ -1,4 +1,4 @@
-## [vNext]
+## [3.195.2]
 ### Fixed
 - `TestFailedException` now has the method `getTestResults` again. [Trello 2496](https://trello.com/c/4xleXQvp)
 
