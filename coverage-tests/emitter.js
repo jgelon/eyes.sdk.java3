@@ -179,7 +179,7 @@ module.exports = function (tracker, test) {
     },
     open({appName, testName, viewportSize}) {
       let command = []
-	  if ((test.name === 'check window fully with fixed scroll root element') || (test.name === 'check frame fully with css stitching')) command.push('eyes.setSaveNewTests(true); ')
+	  if ((test.name === 'check window fully with fixed scroll root element') || (test.name === 'check frame fully with css stitching') || (test.name === 'check hovered region by element with css stitching')) command.push('eyes.setSaveNewTests(true); ')
       command.push('open(driver')
       command.push(java`, ${appName || test.config.appName}`)
       command.push(java`, ${testName || test.config.baselineName}`)
