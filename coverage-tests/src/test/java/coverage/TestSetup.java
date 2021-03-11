@@ -51,7 +51,7 @@ public class TestSetup extends GlobalSetup {
     public void setParentBranchName(String parentTestBranch) { eyes.setParentBranchName(parentTestBranch);}
     public void setHideScrollbars(Boolean hideScrollbars) { eyes.setHideScrollbars(hideScrollbars);}
     public void setIsDisabled(Boolean isDisabled){ eyes.setIsDisabled(isDisabled);}
-    public void setBranchName(String name) {eyes.setParentBranchName(name); eyes.setBranchName(name);}
+    public void setBranchName(String name) {eyes.setBranchName(name);}
     public void setBrowsersInfo(IRenderingBrowserInfo ...browsers){
         Configuration conf = eyes.getConfiguration();
         conf.addBrowsers(browsers);
