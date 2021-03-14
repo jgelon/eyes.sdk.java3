@@ -1,3 +1,7 @@
+## [3.195.3]
+### Updated
+- Supporting safari screenshots in iPhone 12 Pro when running with BrowserStack. [Trello 2499](https://trello.com/c/HzCsXHsc)
+
 ## [3.195.2]
 ### Fixed
 - `TestFailedException` now has the method `getTestResults` again. [Trello 2496](https://trello.com/c/4xleXQvp)
