@@ -131,6 +131,8 @@ public class SafariScreenshotImageProvider extends MobileScreenshotImageProvider
 
         devicesRegions.put(new RectangleSize(1668, 2224), new Rectangle[]{new Rectangle(0, 140, 1668, 2084)});
         devicesRegions.put(new RectangleSize(2224, 1668), new Rectangle[]{new Rectangle(0, 140, 2224, 1528)});
+
+        devicesRegions.put(new RectangleSize(1170, 2532), new Rectangle[]{new Rectangle(0, 293, 1170, 1993)});
     }
 
 }
