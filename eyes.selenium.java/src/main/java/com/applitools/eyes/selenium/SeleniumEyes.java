@@ -413,6 +413,11 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
             return;
         }
 
+        if (checkSettings == null || checkSettings.length == 0) {
+            GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, new IllegalArgumentException("Got empty check settings"), getTestId());
+            return;
+        }
+
         Boolean forceFullPageScreenshot = getConfigurationInstance().getForceFullPageScreenshot();
         boolean originalForceFPS = forceFullPageScreenshot != null && forceFullPageScreenshot;
 
@@ -465,7 +470,9 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
                               Dictionary<Integer, ICheckSettingsInternal> checkSettingsInternalDictionary,
                               ICheckSettings[] checkSettings) {
 
-        if (getRegions.size() == 0) return;
+        if (getRegions.size() == 0) {
+            return;
+        }
 
         this.originalFC = driver.getFrameChain().clone();
 
@@ -585,6 +592,11 @@ public class SeleniumEyes extends RunningTest implements ISeleniumEyes {
                 }
             }
         }
+
+        if (bBox == null) {
+            throw new IllegalStateException("This is an unreachable state: bounding box is null");
+        }
+
         Location offset = screenshot.getLocationInScreenshot(Location.ZERO, CoordinatesType.CONTEXT_AS_IS);
         return bBox.offset(offset);
     }
