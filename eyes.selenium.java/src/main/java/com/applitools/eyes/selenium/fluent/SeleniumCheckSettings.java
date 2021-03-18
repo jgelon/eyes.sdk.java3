@@ -7,6 +7,7 @@ import com.applitools.eyes.Region;
 import com.applitools.eyes.fluent.CheckSettings;
 import com.applitools.eyes.fluent.GetRegion;
 import com.applitools.eyes.fluent.ICheckSettingsInternal;
+import com.applitools.eyes.selenium.Borders;
 import com.applitools.eyes.selenium.CheckState;
 import com.applitools.eyes.selenium.EyesSeleniumUtils;
 import com.applitools.eyes.selenium.wrappers.EyesSeleniumDriver;
@@ -15,11 +16,9 @@ import com.applitools.eyes.serializers.BySerializer;
 import com.applitools.eyes.serializers.WebElementSerializer;
 import com.applitools.eyes.visualgrid.model.VisualGridSelector;
 import com.applitools.utils.ArgumentGuard;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -209,13 +208,13 @@ public class SeleniumCheckSettings extends CheckSettings implements ISeleniumChe
 
     public SeleniumCheckSettings ignore(By selector, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.ignore_(new SimpleRegionBySelector(selector, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.ignore_(new SimpleRegionBySelector(selector, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
     public SeleniumCheckSettings ignore(WebElement element, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.ignore_(new SimpleRegionByElement(element, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.ignore_(new SimpleRegionByElement(element, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
@@ -261,13 +260,13 @@ public class SeleniumCheckSettings extends CheckSettings implements ISeleniumChe
 
     public SeleniumCheckSettings layout(By selector, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.layout_(new SimpleRegionBySelector(selector, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.layout_(new SimpleRegionBySelector(selector, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
     public SeleniumCheckSettings layout(WebElement element, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.layout_(new SimpleRegionByElement(element, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.layout_(new SimpleRegionByElement(element, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
@@ -313,13 +312,13 @@ public class SeleniumCheckSettings extends CheckSettings implements ISeleniumChe
 
     public SeleniumCheckSettings strict(By selector, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.strict_(new SimpleRegionBySelector(selector, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.strict_(new SimpleRegionBySelector(selector, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
     public SeleniumCheckSettings strict(WebElement element, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.strict_(new SimpleRegionByElement(element, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.strict_(new SimpleRegionByElement(element, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
@@ -365,13 +364,13 @@ public class SeleniumCheckSettings extends CheckSettings implements ISeleniumChe
 
     public SeleniumCheckSettings content(By selector, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.content_(new SimpleRegionBySelector(selector, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.content_(new SimpleRegionBySelector(selector, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 
     public SeleniumCheckSettings content(WebElement element, int leftPadding, int topPadding, int rightPadding, int bottomPadding) {
         SeleniumCheckSettings clone = this.clone();
-        clone.content_(new SimpleRegionByElement(element, new Rectangle(leftPadding, topPadding, bottomPadding, rightPadding)));
+        clone.content_(new SimpleRegionByElement(element, new Borders(leftPadding, topPadding, rightPadding, bottomPadding)));
         return clone;
     }
 

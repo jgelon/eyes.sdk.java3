@@ -36,7 +36,7 @@ public class SimpleRegionByElement extends com.applitools.eyes.selenium.fluent.S
         List<Region> value = new ArrayList<>();
         Region region = new Region(new Location(locationAsPoint.getX(), locationAsPoint.getY()), new RectangleSize(size.getWidth(), size.getHeight()),
                 CoordinatesType.SCREENSHOT_AS_IS);
-        region = region.addPadding(padding.x, padding.y, padding.width, padding.height);
+        region = region.addPadding(padding);
         value.add(region);
         return value;
     }

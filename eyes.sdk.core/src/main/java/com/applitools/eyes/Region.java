@@ -1,5 +1,6 @@
 package com.applitools.eyes;
 
+import com.applitools.eyes.selenium.Borders;
 import com.applitools.utils.ArgumentGuard;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -205,12 +206,12 @@ public class Region implements IRegion {
         return new Region(getLocation().scale(scaleRatio), getSize().scale(scaleRatio), getCoordinatesType());
     }
 
-    public Region addPadding(int left, int top, int right, int bottom) {
+    public Region addPadding(Borders padding) {
         return new Region(
-                getLeft() - left,
-                getTop() - top,
-                getWidth() + left + right,
-                getHeight() + top + bottom);
+                getLeft() - padding.getLeft(),
+                getTop() - padding.getTop(),
+                getWidth() + padding.getLeft() + padding.getRight(),
+                getHeight() + padding.getTop() + padding.getBottom());
     }
 
     /**

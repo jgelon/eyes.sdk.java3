@@ -48,7 +48,7 @@ public class TestFluentApi extends TestSetup {
     public void TestCheckWindowWithIgnoreBySelector_Fluent() {
         getEyes().check("Fluent - Window with ignore region by selector", Target.window()
                 .ignore(By.id("overflowing-div"))
-                .ignore(By.id("overflowing-div"), 10, -10, 20, 50));
+                .ignore(By.id("overflowing-div"),10, -10, 20, 50));
 
         setExpectedIgnoreRegions(new Region(8, 81, 304, 184),
                 new Region(-2, 91, 334, 224));

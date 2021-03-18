@@ -2,6 +2,7 @@ package com.applitools.eyes.selenium.fluent;
 
 import com.applitools.eyes.*;
 import com.applitools.eyes.fluent.GetSimpleRegion;
+import com.applitools.eyes.selenium.Borders;
 import com.applitools.eyes.selenium.EyesDriverUtils;
 import com.applitools.eyes.selenium.wrappers.EyesWebDriver;
 import com.applitools.eyes.serializers.WebElementSerializer;
@@ -23,13 +24,13 @@ public class SimpleRegionByElement implements GetSimpleRegion, IGetSeleniumRegio
     @JsonSerialize(using = WebElementSerializer.class)
     protected final WebElement element;
     @JsonIgnore
-    protected final Rectangle padding;
+    protected final Borders padding;
 
     public SimpleRegionByElement(WebElement element) {
-        this(element, new Rectangle(0, 0, 0, 0));
+        this(element, new Borders(0, 0, 0, 0));
     }
 
-    public SimpleRegionByElement(WebElement element, Rectangle padding) {
+    public SimpleRegionByElement(WebElement element, Borders padding) {
         this.element = element;
         this.padding = padding;
     }
@@ -53,7 +54,7 @@ public class SimpleRegionByElement implements GetSimpleRegion, IGetSeleniumRegio
         List<Region> value = new ArrayList<>();
         Region region = new Region(adjustedLocation, new RectangleSize(size.width, size.height),
                 CoordinatesType.SCREENSHOT_AS_IS);
-        region = region.addPadding(padding.x, padding.y, padding.width, padding.height);
+        region = region.addPadding(padding);
         value.add(region);
 
         return value;
