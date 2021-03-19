@@ -406,4 +406,12 @@ public class AndroidScrollPositionProvider extends AppiumScrollPositionProvider 
                 Pair.of("scrollableHeightFromHelper", scrollableContentSize));
         return scrollableContentSize;
     }
+
+    @Override
+    public void cleanupCachedData() {
+        super.cleanupCachedData();
+        curScrollPos = null;
+        entireSize = null;
+        scrollableViewLoc = null;
+    }
 }
