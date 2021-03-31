@@ -455,6 +455,21 @@ public class VisualGridEyes implements ISeleniumEyes {
             for (Map.Entry<Integer, List<RunningTest>> entry : requiredWidths.entrySet()) {
                 captureDomForResourceCollection(entry.getKey(), entry.getValue(), switchTo, checkSettingsInternal, regionsXPaths, source);
             }
+
+
+            Set<String> testIds = new HashSet<>();
+            synchronized (testList) {
+                for (RunningTest runningTest : testList.values()) {
+                    testIds.add(runningTest.getTestId());
+                }
+            }
+
+            try {
+                EyesDriverUtils.setViewportSize(logger, webDriver, viewportSize);
+                Thread.sleep(300);
+            } catch (Throwable t) {
+                GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, Type.DOM_SCRIPT, t, testIds.toArray(new String[0]));
+            }
         } catch (Throwable e) {
             Error error = new Error(e);
             synchronized (testList) {

@@ -1,6 +1,8 @@
 ## [vNext]
 ### Updated
 - Added more cached parameters into Scroll providers. [Trello 1854](https://trello.com/c/Sdzfuue2)
+### Fixed
+- Change to original breakpoints after check with layout breakpoints. [Trello 2511](https://trello.com/c/fvNCUeh0)
 
 ## [3.197.0]
 ### Added
