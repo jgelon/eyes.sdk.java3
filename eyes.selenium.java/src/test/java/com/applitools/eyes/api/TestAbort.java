@@ -70,7 +70,6 @@ public class TestAbort extends ReportingTestSuite {
         Eyes eyes = setUp();
         eyes.check(useVisualGrid ? "VG" : "SEL", Target.window());
         Thread.sleep(5000);
-        eyes.closeAsync();
         eyes.abortAsync();
         tearDown(eyes);
     }
