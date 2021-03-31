@@ -26,9 +26,6 @@ public abstract class AppiumScrollPositionProvider implements ScrollPositionProv
     protected WebElement scrollRootElement = null;
 
     protected ContentSize contentSize;
-    protected WebElement cachedScrollableView = null;
-    protected Location cachedScrollableViewLocation = null;
-    protected Region cachedScrollableViewRegion = null;
 
     private WebElement firstVisibleChild;
     private boolean isVerticalScrollGapSet;
@@ -79,9 +76,6 @@ public abstract class AppiumScrollPositionProvider implements ScrollPositionProv
     }
 
     public Location getScrollableViewLocation() {
-        if (cachedScrollableViewLocation != null) {
-            return cachedScrollableViewLocation;
-        }
         WebElement activeScroll, firstVisChild;
         Point scrollLoc, firstVisChildLoc;
         try {
@@ -96,31 +90,30 @@ public abstract class AppiumScrollPositionProvider implements ScrollPositionProv
             verticalScrollGap = firstVisChildLoc.y - scrollLoc.y;
             isVerticalScrollGapSet = true;
         }
-        cachedScrollableViewLocation = new Location(scrollLoc.x, scrollLoc.y + verticalScrollGap);
+        Location loc = new Location(scrollLoc.x, scrollLoc.y + verticalScrollGap);
         logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
-                Pair.of("location", cachedScrollableViewLocation),
+                Pair.of("location", loc),
                 Pair.of("verticalScrollGap", verticalScrollGap));
-        return cachedScrollableViewLocation;
+        return loc;
     }
 
     public Region getScrollableViewRegion() {
-        if (cachedScrollableViewRegion != null) {
-            return cachedScrollableViewRegion;
-        }
+        WebElement activeScroll;
+        Region reg;
         try {
-            WebElement activeScroll = getFirstScrollableView();
+            activeScroll = getFirstScrollableView();
             Location scrollLoc = getScrollableViewLocation();
             Dimension scrollDim = activeScroll.getSize();
-            cachedScrollableViewRegion = new Region(scrollLoc.getX(), scrollLoc.getY(), scrollDim.width, scrollDim.height - verticalScrollGap);
+            reg = new Region(scrollLoc.getX(), scrollLoc.getY(), scrollDim.width, scrollDim.height - verticalScrollGap);
         } catch (NoSuchElementException e) {
             GeneralUtils.logExceptionStackTrace(logger, Stage.CHECK, e);
-            cachedScrollableViewRegion = new Region(0, 0, 0, 0);
+            reg = new Region(0, 0, 0, 0);
         }
 
         logger.log(TraceLevel.Debug, eyesDriver.getTestId(), Stage.CHECK,
-                Pair.of("region", cachedScrollableViewRegion),
+                Pair.of("region", reg),
                 Pair.of("verticalScrollGap", verticalScrollGap));
-        return cachedScrollableViewRegion;
+        return reg;
     }
 
     public Location getFirstVisibleChildLocation() {
@@ -210,23 +203,18 @@ public abstract class AppiumScrollPositionProvider implements ScrollPositionProv
     public abstract Region getElementRegion(WebElement element, boolean shouldStitchContent, Boolean statusBarExists);
 
     protected WebElement getFirstScrollableView() {
-        if (cachedScrollableView != null) {
-            return cachedScrollableView;
+        if (scrollRootElement != null) {
+            return scrollRootElement;
         }
-        cachedScrollableView = EyesAppiumUtils.getFirstScrollableView(driver);
-        return cachedScrollableView;
+        return EyesAppiumUtils.getFirstScrollableView(driver);
     }
 
     public void cleanupCachedData() {
         this.contentSize = null;
         this.firstVisibleChild = null;
-        this.cachedScrollableView = null;
-        this.cachedScrollableViewLocation = null;
-        this.cachedScrollableViewRegion = null;
     }
 
     public void setScrollRootElement(WebElement scrollRootElement) {
         this.scrollRootElement = scrollRootElement;
-        this.cachedScrollableView = scrollRootElement;
     }
 }
