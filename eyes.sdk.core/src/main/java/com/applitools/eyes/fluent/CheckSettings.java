@@ -33,6 +33,7 @@ public class CheckSettings implements ICheckSettings, ICheckSettingsInternal {
     protected Boolean ignoreDisplacements;
     private List<VisualGridOption> visualGridOptions = new ArrayList<>();
     private BaseOcrRegion ocrRegion = null;
+    private String variationGroupId = null;
 
     protected CheckSettings() { }
 
@@ -460,6 +461,7 @@ public class CheckSettings implements ICheckSettings, ICheckSettingsInternal {
         clone.useDom = (this.useDom);
         clone.visualGridOptions = this.visualGridOptions;
         clone.ocrRegion = this.ocrRegion;
+        clone.variationGroupId = this.variationGroupId;
     }
 
     public void setStitchContent(boolean stitchContent) {
@@ -551,6 +553,17 @@ public class CheckSettings implements ICheckSettings, ICheckSettingsInternal {
     @Override
     public BaseOcrRegion getOcrRegion() {
         return ocrRegion;
+    }
+
+    public ICheckSettings variationGroupId(String variationGroupId) {
+        CheckSettings clone = clone();
+        clone.variationGroupId = variationGroupId;
+        return clone;
+    }
+
+    @Override
+    public String getVariationGroupId() {
+        return variationGroupId;
     }
 
     @Override
