@@ -25,9 +25,7 @@ import java.util.*;
  * Used so we'll be able to return the users an object with the same
  * functionality as {@link org.openqa.selenium.remote.RemoteWebDriver}.
  */
-public class EyesSeleniumDriver extends EyesWebDriver implements HasInputDevices, FindsByClassName,
-        FindsByCssSelector, FindsById, FindsByLinkText, FindsByName, FindsByTagName,
-        FindsByXPath, HasTouchScreen, IEyesJsExecutor {
+public class EyesSeleniumDriver extends EyesWebDriver implements HasInputDevices, HasTouchScreen, IEyesJsExecutor {
 
     private final SeleniumEyes eyes;
     private final RemoteWebDriver driver;
@@ -248,18 +246,6 @@ public class EyesSeleniumDriver extends EyesWebDriver implements HasInputDevices
 
     public Keyboard getKeyboard() {
         return new EyesKeyboard(logger, this, driver.getKeyboard());
-    }
-
-    public WebElement findElementByClassName(String className) {
-        return findElement(By.className(className));
-    }
-
-    public List<WebElement> findElementsByClassName(String className) {
-        return findElements(By.className(className));
-    }
-
-    public WebElement findElementByCssSelector(String cssSelector) {
-        return findElement(By.cssSelector(cssSelector));
     }
 
     public List<WebElement> findElementsByCssSelector(String cssSelector) {

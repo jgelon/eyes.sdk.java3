@@ -2,6 +2,7 @@ package com.applitools.eyes.selenium;
 
 import com.applitools.eyes.BatchInfo;
 import com.applitools.eyes.utils.TestUtils;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -39,8 +40,8 @@ public class TestDataProvider {
 
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-        DesiredCapabilities ie11Options = DesiredCapabilities.internetExplorer();
-        ie11Options.setCapability(CapabilityType.BROWSER_VERSION, "11");
+//        DesiredCapabilities ie11Options = DesiredCapabilities.internetExplorer();
+//        ie11Options.setCapability(CapabilityType.BROWSER_VERSION, "11");
 
         SafariOptions safariOptions = new SafariOptions();
 
