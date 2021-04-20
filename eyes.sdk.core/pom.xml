@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-connectivity-java3-jersey2x</artifactId>
-            <version>3.199.1-SEL4</version>
+            <version>3.199.0</version>
         </dependency>
     </dependencies>
 
