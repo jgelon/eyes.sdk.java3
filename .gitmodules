@@ -1,0 +1,4 @@
+[submodule "eyes.common.java"]
+	path = eyes.common.java
+	url = https://github.com/applitools/eyes.common.java3.git
+
