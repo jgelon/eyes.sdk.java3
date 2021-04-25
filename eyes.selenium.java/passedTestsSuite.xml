@@ -68,16 +68,6 @@
             </class>
         </classes>
     </test>
-
-    <test name="TestAcme">
-        <classes>
-            <class name="com.applitools.eyes.selenium.TestAcme">
-                <methods>
-                    <include name="TestAcmeLogin"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
     <test name="TestSendDom">
         <classes>
             <class name="com.applitools.eyes.selenium.capture.TestSendDom">
