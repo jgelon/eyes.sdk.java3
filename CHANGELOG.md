@@ -1,4 +1,4 @@
-## [vNext]
+## [3.200.0]
 ### Added
 - Now sending cookies when trying to download resources and disable browser fetching by default. [Trello 2517](https://trello.com/c/QeKRfMgv)
 ### Updated
