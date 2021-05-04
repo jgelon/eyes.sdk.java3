@@ -10,19 +10,19 @@
     <parent>
         <artifactId>eyes-sdk-java3-parent</artifactId>
         <groupId>com.applitools</groupId>
-        <version>3.199.1-SEL4</version>
+        <version>3.200.0-SEL4</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-sdk-core-java3</artifactId>
-            <version>3.199.1-SEL4</version>
+            <version>3.200.0-SEL4</version>
         </dependency>
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-sdk-core-java3</artifactId>
-            <version>3.199.1-SEL4</version>
+            <version>3.200.0-SEL4</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
