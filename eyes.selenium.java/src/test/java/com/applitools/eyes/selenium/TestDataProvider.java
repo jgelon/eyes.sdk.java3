@@ -39,8 +39,8 @@ public class TestDataProvider {
 
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-        DesiredCapabilities ie11Options = DesiredCapabilities.internetExplorer();
-        ie11Options.setCapability(CapabilityType.BROWSER_VERSION, "11");
+//        DesiredCapabilities ie11Options = DesiredCapabilities.internetExplorer();
+//        ie11Options.setCapability(CapabilityType.BROWSER_VERSION, "11");
 
         SafariOptions safariOptions = new SafariOptions();
 
