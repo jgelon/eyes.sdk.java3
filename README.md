@@ -3,12 +3,9 @@
 This repo is used for creating a Selenium4 version of the eyes.sdk.java3 of AppliTools.
 It is forked on GitHub and can be updated there.
 
-The Bamboo Build is set to build the Develop branch, you need to set the maven release in your last 
-commit. Always use the version as set by AppliTools and add the `-SEL4-SNAPSHOT`
-
-Update all versions: `mvn --batch-mode release:update-versions -DdevelopmentVersion=3.199.1-SEL4-SNAPSHOT`
-
-Make a release `mvn release:clean release:prepare -DskipTests=true`
+The Bamboo Build (https://bamboo.devops.wartsila.com/browse/DDNAM-TECS) is set to build the Develop 
+branch, you need to set the maven release in your last commit. Just replace all 3.xxx.x 
+versions with the new number.
 
 # eyes.sdk.java3
 Applitools Eyes Java SDK Version 3.
