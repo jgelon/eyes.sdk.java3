@@ -104,9 +104,15 @@
     </modules>
 
     <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus</name>
+            <url>https://nexus.wartsila.com/repository/drunen-maven</url>
+        </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>maven.wartsila.com</id>
+            <name>Nexus</name>
+            <url>https://nexus.wartsila.com/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
